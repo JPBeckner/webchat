@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'chat',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -49,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'webchat.urls'
+ROOT_URLCONF = 'setup.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +69,21 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'webchat.wsgi.application'
+WSGI_APPLICATION = 'setup.wsgi.application'
+
+# Channels
+ASGI_APPLICATION = 'setup.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    } if not DEBUG else {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 
 # Database
