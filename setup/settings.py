@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-0+23uiujs!s^t=73mw7ye92t8_hx@hko7$vx)85sygt26@l8zv
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '0.0.0.0',
     'vast-escarpment-43328.herokuapp.com'
 ]
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chat',
+    'user',
     'channels'
 ]
 
@@ -58,7 +60,7 @@ ROOT_URLCONF = 'setup.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
