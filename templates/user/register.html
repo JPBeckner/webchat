@@ -1,0 +1,29 @@
+<!-- chat/templates/chat/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>WebChat</title>
+</head>
+<body>
+    <p>Register a new user.</p>
+    <br>
+    <div>
+        <form action="{% url 'user:register' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <label for="name"><b>User name</b></label>
+                <input type="text" id="name" name="name" placeholder="User name">
+                </div>
+                    <label for="password"><b>Password</b></label>
+                    <input id="password" type="password" name="password" placeholder="User password">
+                </div>
+                <div>
+                    <button type="submit">Register</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>

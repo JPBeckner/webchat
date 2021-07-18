@@ -1,0 +1,33 @@
+<!-- chat/templates/chat/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>WebChat</title>
+</head>
+<body>
+    <p>Hello and Welcome :)</p>
+    <br>
+    <div style="center">
+        <p>This is a simple WebChat.</p>
+        <p>Here you can access a chat to talk to other people.</p>
+        <p>To get access to the chats you must log in first.</p>
+        <br>
+        <div>
+            <button type="button" class="btn btn-primary" onclick="showLogin()">Login</button>
+            <button type="button" class="btn btn-primary" onclick="showRegister()">Register</button>
+        </div>
+    </div>
+</body>
+<script>
+function showLogin()
+    {
+        location.href = "{% url 'user:login' %}"
+    }
+
+    function showRegister()
+    {
+        location.href = "{% url 'user:register' %}"
+    }
+</script>
+</html>
