@@ -5,8 +5,8 @@ def index(request):
     return render(request=request, template_name='chat/index.html')
 
 
-def chat(request):
-    return render(request=request, template_name='chat/chats.html')
+def join(request):
+    return render(request=request, template_name='chat/join.html')
 
 
 def room(request, room_name):
