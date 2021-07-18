@@ -1,2 +1,2 @@
-web: pipenv run python3 manage.py runserver
+web: python3 manage.py runserver
 
