@@ -1,8 +1,10 @@
+from django.conf import urls
 from django.conf.urls import include
 from django.urls import path
 from django.contrib import admin
 
 urlpatterns = [
+    path('', include('chat.urls', namespace='chat')),
+    path('user/', include('user.urls', namespace='user')),
     path('admin/', admin.site.urls),
-    path('chat/', include('chat.urls')),
 ]
