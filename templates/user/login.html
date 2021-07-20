@@ -9,6 +9,14 @@
     <p>Welcome to this WebChat</p>
     <br>
     <div>
+        {% if messages %}
+            {% for message in messages %}
+                <p>
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+
         <p>Please, login to access a chat</p>
         <form action="{% url 'user:login' %}" method="post">
             {% csrf_token %}

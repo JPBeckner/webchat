@@ -9,6 +9,14 @@
     <p>Register a new user.</p>
     <br>
     <div>
+        {% if messages %}
+            <p> Error to register user: </p>
+            {% for message in messages %}
+                <p>
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
         <form action="{% url 'user:register' %}" method="POST">
             {% csrf_token %}
             <div class="row">
