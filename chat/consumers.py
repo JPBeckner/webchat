@@ -1,4 +1,5 @@
 from json import loads, dumps
+from datetime import datetime
 
 from channels.generic.websocket import AsyncWebsocketConsumer
 
@@ -27,21 +28,30 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = loads(text_data)
         message = text_data_json['message']
+        username = text_data_json['username']
 
         # Send message to room group
         await self.channel_layer.group_send(
             self.room_group_name,
             {
                 'type': 'chat_message',
-                'message': message
+                'message': message,
+                'username': username
             }
         )
 
     # Receive message from room group
     async def chat_message(self, event):
-        message = event['message']
+        message = self.format_message(
+            message=event['message'],
+            username=event.get('username', 'TheUnknown')
+        )
 
         # Send message to WebSocket
         await self.send(text_data=dumps({
             'message': message
         }))
+
+
+    def format_message(self, message: str, username: str) -> str:
+        return f"[{datetime.now().strftime('%H:%M:%S')}] {username}: {message}"

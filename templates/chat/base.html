@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+</head>
+<body>
+    <header>
+        <p> {{ request.session.username }} loged in </p>
+        <button type="button" onclick="logout()">Logout</button>
+    </header>
+
+    {% block content %} {% endblock %}
+    
+</body>
+<script>
+function logout()
+{
+    location.href = "{% url 'user:logout' %}"
+}
+</script>
+</html>
