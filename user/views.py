@@ -11,7 +11,7 @@ def login(request: HttpRequest):
 
         if any(empty_value(value) for value in [username, password]):
             messages.error(request=request, message="Empty value(s)")
-            return redirect('user:login')
+            return redirect(to='user:login')
 
         if User.objects.filter(username=username).exists():
             user = auth.authenticate(
@@ -22,11 +22,17 @@ def login(request: HttpRequest):
             if user is not None:
                 auth.login(request=request, user=user)
                 print('login success')
-                return redirect('chat:join')
+                request.session['username'] = username
+                return redirect(to='chat:join')
 
 
 
     return render(request=request, template_name='user/login.html')
+
+
+def logout(request):
+    auth.logout(request=request)
+    return redirect(to='chat:index')
 
 
 def register(request: HttpRequest):
@@ -52,7 +58,10 @@ def register(request: HttpRequest):
         
         return redirect('user:login')
 
-    return render(request=request, template_name='user/register.html')
+    return render(
+        request=request, 
+        template_name='user/register.html',
+    )
 
 
 def empty_value(value: str) -> bool:
