@@ -1,0 +1,58 @@
+<!-- chat/templates/chat/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>WebChat</title>
+</head>
+<body>
+    <p>Register a new Bot.</p>
+    <br>
+    <div>
+        {% if messages %}
+            <p> Error to register the Bot: </p>
+            {% for message in messages %}
+                <p>
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+        <form action="{% url 'bot:register' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div>
+                    <p> The Bot name </p>
+                    <label for="name"><b>Name</b></label>
+                    <input type="text" id="name" name="name" placeholder="Bot name">
+                </div>
+                </div>
+                    <p> 
+                        The URL in wich the Bot will receive the command. 
+                        Example: yourbot.com/receive-command
+                    </p>
+                    <p> 
+                        This route should be a POST and receives a JSON with the following parameters:
+                        <br>
+                        <ul>
+                            <li>command: string value</li>
+                            <li>parameter: string value with the command parameter</li>
+                            <li>room: string value with the room name</li>
+                        </ul>
+                    </p>
+                    <label for="url"><b>URL</b></label>
+                    <input id="url" type="text" name="url" placeholder="Bot URL">
+                </div>
+                </div>
+                    <p> The Command that users will use to call the Bot. </p>
+                    <label for="command"><b>Command</b></label>
+                    <input id="command" type="command" name="command" placeholder="Bot command">
+                </div>
+                <div>
+                    <button type="submit">Register</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>
