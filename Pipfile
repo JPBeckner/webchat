@@ -8,6 +8,7 @@ django = "~=3.2"
 channels = "~=3.0"
 channels_redis = "~=3.3"
 psycopg2-binary = "~=2.9"
+requests = "~=2.26"
 
 [dev-packages]
 
