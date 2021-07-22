@@ -1,4 +1,5 @@
 from re import findall
+from json import loads
 
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
@@ -56,22 +57,30 @@ def check_bot_command(function):
             return
 
         # send the command to the bot called.
-        await sync_to_async(
+        response_command = await sync_to_async(
             func=send_command
         )(url=bot[0].url, command=command, parameter=parameter, room=event.get('room', ''))
+        event['username'] = bot[0].name
+        event['message'] = response_command
+        await function(chat, event)
 
     return wrapper
 
 
 def send_command(url: str, command: str, parameter: str, room: str):
-    post(
-        url=url,
-        json={
-            'command': command,
-            'parameter': parameter,
-            'room': room
-        }
-    )
+    try:
+        response = post(
+            url=url,
+            json={
+                'command': command,
+                'parameter': parameter,
+                'room': room
+            }
+        )
+        return loads(response.text).get('msg', "Sorry, can't aswer :(")
+    except Exception as exc:
+        print(exc)
+        return "Sorry, can't aswer :("
 
 
 def empty_value(value: str) -> bool:
