@@ -84,11 +84,13 @@ CHANNEL_LAYERS = {
     'default': {
         "BACKEND": "channels.layers.InMemoryChannelLayer"
     },
-    # Redis not configured
-    # 'BACKEND': 'channels_redis.core.RedisChannelLayer',
-    # 'CONFIG': {
-    #     "hosts": [('127.0.0.1', 6379)],
-    # },
+    # Redis
+    # 'default': {
+    #     'BACKEND': 'channels_redis.core.RedisChannelLayer',
+    #     'CONFIG': {
+    #         "hosts": [(os.getenv('REDIS_HOST'), os.getenv('REDIS_PORT'))],
+    #     },
+    # }
 }
 
 
@@ -97,13 +99,6 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST'),
-        'PORT': os.getenv('DATABASE_PORT'),
-    } if not DEBUG else {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3'
     }
