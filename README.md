@@ -19,9 +19,12 @@ It's possible in some ways:
 ```shell
 pipenv run execute  # recommended.
 ```
+or
 ```shell
 pipenv run python manage.py runserver 0.0.0.0:8000
 ```
+
+Now, since it's running locally, just access: http://0.0.0.0:8000/
 
 ## Using The Stock Bot
 Type on chat the command `/stock=` followed by some parameter:
